@@ -1,0 +1,58 @@
+body {
+    background-color: aliceblue;
+}
+.comment {
+    display: flex;
+    background-color: white;
+    margin: 10px;
+}
+.scoreHolder {
+    padding: 10px;
+    color: darkblue;
+}
+ .contentHolder {
+    display: flex;
+    flex-direction: column;
+ }
+ .topContent {
+    display: flex;
+    justify-content: space-between;
+}
+.topleft {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.topleft img {
+    max-width: 20px;
+    padding-right: 10px;
+}
+.topleft .username {
+    color: black;
+    font-weight: bold;
+    padding-right: 10px;
+}
+.topleft .timeposted {
+    color: darkgray;
+}
+.topRight .Reply {
+    color: blue;
+}
+
+.replyContent {
+    display: flex;
+    flex-direction: column;
+}
+.verticalLine {
+    display: flex;
+    justify-content: center;
+    width: 5%;
+}
+.lineElem {
+    border-right: lightgray 2px solid;
+}
+.replyElem {
+    display: flex;
+    margin-left: 20px;
+}
