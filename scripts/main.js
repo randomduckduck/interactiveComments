@@ -1,13 +1,50 @@
 let data = '';
-const commentChainHolderElem = document.querySelector('.commentsChainHolder');
+const contentMainElem = document.querySelector('.content');
+// const commentChainHolderElem = document.querySelector('.commentsChainHolder');
+// const userAddCommentHolder = document.querySelector('.userAddCommentHolder');
 async function getData() {
     let tempdata = await fetch('./data.json')
             .then(resp => resp.json())
             .then(jsondata => {console.log('got data now which is:', jsondata); data = jsondata;});
     console.log('data variable is:', data, 'while tempdata is:', tempdata);
-    renderComments();
+    let commentChainHolder = document.createElement('div');
+    commentChainHolder.className = 'commentsChainHolder';
+    renderComments(commentChainHolder,data);
+    // renderComments();
+    let userAddCommentHolder = document.createElement('div');
+    userAddCommentHolder.className = 'userAddCommentHolder';
+    userAddCommentHolder.appendChild(makeOwnUserCommentBox());
+    contentMainElem.appendChild(commentChainHolder);
+    contentMainElem.appendChild(userAddCommentHolder);
 }
-function renderComments() {
+function makeOwnUserCommentBox() {
+    let userObj = data.currentUser;
+    let divHolder = document.createElement('div');
+    divHolder.className = 'userComment';
+
+    let imgElem = document.createElement('img');
+    imgElem.src = userObj.image.png;
+    imgElem.className = 'profilepicClass'
+    let textElem = document.createElement('div');
+    textElem.name = 'userComment';
+    textElem.className = 'commentTextAreaBox commentborder';
+    textElem.contentEditable = 'true';
+    let commentActionHolder = document.createElement('div');
+    commentActionHolder.className = 'commentAction';
+    commentActionHolder.appendChild(makeActionButton('send', 'Send'));
+    divHolder.appendChild(imgElem);
+    divHolder.appendChild(textElem);
+    divHolder.appendChild(commentActionHolder);
+    return divHolder;
+}
+function makeActionButton(classname, btnName) {
+    let sendButton = document.createElement('button');
+    sendButton.className = 'actionbutton ' + classname;
+    sendButton.textContent = btnName;
+    return sendButton;
+}
+
+function renderComments(commentChainHolderElem, data) {
   console.log('data for rendering comments is:', data);
   data.comments.forEach( commentObj => {
     let divHolder = document.createElement('div');
@@ -65,26 +102,34 @@ function makeContentHolder(commentObj) {
     let commentContent = makeCommentContent(commentObj.content);
     divHolder.appendChild(topContent);
     divHolder.appendChild(commentContent);
+    if (commentObj.user.username == data.currentUser.username) {
+        let updatebutton = makeActionButton(' update hidden ', 'Update');
+        divHolder.appendChild(updatebutton);
+    }
     return divHolder;
 }
 function maketopContent(userObj, timeposted) {
     //makeTopLeft also requires user -> username and profile pic
     let topleft = makeTopLeft(userObj, timeposted);
-    let topRight = makeTopRight();
+    let topRight = makeTopRight(userObj);
     let divHolder = document.createElement('div');
     divHolder.className = 'topContent';
     divHolder.appendChild(topleft);
     divHolder.appendChild(topRight);
     return divHolder;
 }
-function makeTopRight() {
+function makeTopRight(userObj) {
+    let currentUserName = data.currentUser.username;
+    // console.log('curentUsername:', currentUserName, ' but current comment being parse is for ', userObj.username);
     let divHolder = document.createElement('div');
     divHolder.className = 'topRight';
     let userButtonelem = document.createElement('div');
-    let replyButton = document.createElement('button');
-    replyButton.className = 'Reply';
-    replyButton.textContent = 'Reply';
+    let replyButton = makeActionButton('reply ' + (currentUserName == userObj.username ? ' hidden '  : ' '), 'Reply');
+    let deleteButton = makeActionButton('delete ' + (currentUserName == userObj.username ? ' ':' hidden '), 'Delete');
+    let editButton = makeActionButton('edit ' + (currentUserName == userObj.username ? ' ': ' hidden '), 'Edit');
     userButtonelem.appendChild(replyButton);
+    userButtonelem.appendChild(deleteButton);
+    userButtonelem.appendChild(editButton);
     divHolder.appendChild(userButtonelem);
     return divHolder;
 
@@ -94,6 +139,7 @@ function makeTopLeft(userObj, timeposted = '1month ago') {
     let divHolder = document.createElement('div');
     divHolder.className = 'topleft';
     let imgelem = document.createElement('img');
+    imgelem.className = 'profilepicClass';
     imgelem.src = userObj.image.png;
     imgelem.alt = 'user progile pic';
     let usernameElem = document.createElement('span');
@@ -130,3 +176,22 @@ function makeScoreHolder(scoreValue) {
 }
 getData();
 console.log('main execution continues');
+function handleClick(e) {
+    // console.log(this, e, e.target);
+    if (e.target.matches('button')) {
+        // console.log('button clicked')
+        e.stopPropagation();
+        e.preventDefault();
+        if (e.target.classList.contains('edit')) {
+            // console.log('edit button called');
+            let contentHolder = e.target.closest('.contentHolder');
+            let contentBox = contentHolder.querySelector('.commentContent');
+            contentBox.classList.add('commentborder');
+            let updatebutton = contentHolder.querySelector('.update');
+            if (updatebutton ) {
+                updatebutton.classList.remove('hidden');
+            }
+        }
+    }
+}
+contentMainElem.addEventListener('click', handleClick);

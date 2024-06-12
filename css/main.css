@@ -1,10 +1,14 @@
 body {
     background-color: aliceblue;
 }
+.hidden {
+    display: none;
+}
 .comment {
     display: flex;
     background-color: white;
     margin: 10px;
+    border-radius: 5px;
 }
 .scoreHolder {
     padding: 10px;
@@ -24,9 +28,10 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.topleft img {
+.profilepicClass {
     max-width: 20px;
     padding-right: 10px;
+    max-height: 20px;
 }
 .topleft .username {
     color: black;
@@ -55,4 +60,27 @@ body {
 .replyElem {
     display: flex;
     margin-left: 20px;
+}
+.userComment {
+    display: flex;
+    align-items: center;
+}
+.commentTextAreaBox {
+    flex: 1;
+    margin-right: 20px;
+    background-color: white;
+    min-height: 50px;
+    padding: 5px;
+}
+.commentborder {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+.userAddCommentHolder {
+    margin-left: 20px;
+}
+.update {
+    width: 20%;
+    align-self: end;
 }
