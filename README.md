@@ -1,4 +1,4 @@
-Intermediate challenge given by frontEndMentorio website. 
+Intermediate challenge given by frontEndMentorio website. Challenge here https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9
 Wrote using vanilla js. 
 Works for any length of json data. current code has json length which was given by them, but code is written such that it will generate html code using js based on json data.
 
