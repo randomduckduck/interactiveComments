@@ -24,7 +24,7 @@
   </div>
   <div>
     <div class="content">
-        <div class="commentsChainHolder">
+        <!-- <div class="commentsChainHolder">
             <div class="commentElem">
                 <div class="comment">
                     <div class="scoreHolder">
@@ -33,9 +33,7 @@
                     <div class="contentHolder">
                         <div class="topContent">
                             <div class="topleft">
-                                <!-- <div class="userpic"> -->
                                 <img src="" alt="">
-                                <!-- </div> -->
                                 <span class="username">
                                     amyrobson
                                 </span>
@@ -70,9 +68,7 @@
                                 <div class="contentHolder">
                                     <div class="topContent">
                                         <div class="topleft">
-                                            <!-- <div class="userpic"> -->
                                             <img src="" alt="">
-                                            <!-- </div> -->
                                             <span class="username">
                                                 amyrobson
                                             </span>
@@ -100,9 +96,7 @@
                                 <div class="contentHolder">
                                     <div class="topContent">
                                         <div class="topleft">
-                                            <!-- <div class="userpic"> -->
                                             <img src="" alt="">
-                                            <!-- </div> -->
                                             <span class="username">
                                                 amyrobson
                                             </span>
@@ -138,9 +132,19 @@
                     <button class="reply">Reply</button>
                 </div>
             </div>
+        </div> -->
+    </div>
+</div>
+  <div class="modalHolder hidden">
+    <div class="modal">
+        <h2>Delete Comment</h2>
+        <p class="modalText">Are you sure you want to delet the comment? This will remove the comment and can't be undone.</p>
+        <div class="modalBtnsHolder">
+            <button class="cancelBtn" onclick="modalCancelClick()">NO, CANCEL</button>
+            <button class="yesDeleteBtn" onclick="modalDeleteClick()">YES, DELETE</button>
         </div>
     </div>
-  </div>
+</div>
   <script src="scripts/main.js"></script>
 </body>
 </html>

@@ -13,11 +13,11 @@ async function getData() {
     // renderComments();
     let userAddCommentHolder = document.createElement('div');
     userAddCommentHolder.className = 'userAddCommentHolder';
-    userAddCommentHolder.appendChild(makeOwnUserCommentBox());
+    userAddCommentHolder.appendChild(makeOwnUserCommentBox('send'));
     contentMainElem.appendChild(commentChainHolder);
     contentMainElem.appendChild(userAddCommentHolder);
 }
-function makeOwnUserCommentBox() {
+function makeOwnUserCommentBox(btnName) {
     let userObj = data.currentUser;
     let divHolder = document.createElement('div');
     divHolder.className = 'userComment';
@@ -31,7 +31,7 @@ function makeOwnUserCommentBox() {
     textElem.contentEditable = 'true';
     let commentActionHolder = document.createElement('div');
     commentActionHolder.className = 'commentAction';
-    commentActionHolder.appendChild(makeActionButton('send', 'Send'));
+    commentActionHolder.appendChild(makeActionButton(btnName, btnName));
     divHolder.appendChild(imgElem);
     divHolder.appendChild(textElem);
     divHolder.appendChild(commentActionHolder);
@@ -75,7 +75,10 @@ function makeReplyContent(replyObj) {
     return divHolder;
 }
 function makeReplyDivs(replyObj) {
-    return makeComment(replyObj);
+    let divHolder = document.createElement('div');
+    divHolder.className = 'commentandreplyHolder';
+    divHolder.appendChild(makeComment(replyObj));
+    return divHolder;
 }
 function makeVerticalElem () {
     let divHolder = document.createElement('div');
@@ -191,7 +194,46 @@ function handleClick(e) {
             if (updatebutton ) {
                 updatebutton.classList.remove('hidden');
             }
+        } else if (e.target.classList.contains('reply')) {
+            console.log('reply button clicked');
+            console.log(this, e.target);
+            let someElem = makeOwnUserCommentBox('reply');
+            let replyElem = e.target.closest('.replyElem');
+            if (replyElem) {
+                // let divHolder = document.createElement('div');
+                // let verticalElem = makeVerticalElem();
+                // divHolder.appendChild(verticalElem);
+                // divHolder.appendChild(someElem);
+                // someElem = divHolder;   
+            } else {
+                replyElem = e.target.closest('.commentElem');
+            }
+            if (replyElem.dataset.replyOpen == 'open') {
+                return;
+            }
+            let mm = replyElem;
+            mm = mm.querySelector('.comment');
+            let mkm = mm.parentNode;
+            console.log('mm:', mm, ' mkm :', mkm);
+            mkm.insertBefore(someElem,  mm.nextSibling);
+            replyElem.dataset.replyOpen = 'open';
+        } else if (e.target.classList.contains('delete')) {
+            let modalElem = document.querySelector('.modalHolder');
+            modalElem.classList.remove('hidden');
         }
     }
 }
 contentMainElem.addEventListener('click', handleClick);
+
+function modalCancelClick() {
+    console.log('cancel clicked');
+    closeModal();
+}
+function modalDeleteClick() {
+    console.log('delete clicked');
+    closeModal();
+}
+function closeModal() {
+    let modalElem = document.querySelector('.modalHolder');
+    modalElem.classList.add('hidden');
+}
