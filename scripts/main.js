@@ -31,7 +31,7 @@ function makeOwnUserCommentBox(btnName) {
     textElem.contentEditable = 'true';
     let commentActionHolder = document.createElement('div');
     commentActionHolder.className = 'commentAction';
-    commentActionHolder.appendChild(makeActionButton(btnName, btnName));
+    commentActionHolder.appendChild(makeActionButton(btnName, btnName.toUpperCase()));
     divHolder.appendChild(imgElem);
     divHolder.appendChild(textElem);
     divHolder.appendChild(commentActionHolder);
@@ -106,7 +106,7 @@ function makeContentHolder(commentObj) {
     divHolder.appendChild(topContent);
     divHolder.appendChild(commentContent);
     if (commentObj.user.username == data.currentUser.username) {
-        let updatebutton = makeActionButton(' update hidden ', 'Update');
+        let updatebutton = makeActionButton(' update hidden ', 'Update'.toUpperCase());
         divHolder.appendChild(updatebutton);
     }
     return divHolder;
@@ -127,7 +127,7 @@ function makeTopRight(userObj) {
     let divHolder = document.createElement('div');
     divHolder.className = 'topRight';
     let userButtonelem = document.createElement('div');
-    let replyButton = makeActionButton('reply ' + (currentUserName == userObj.username ? ' hidden '  : ' '), 'Reply');
+    let replyButton = makeActionButton('reply ' + (currentUserName == userObj.username ? ' hidden '  : ' '), ' ⮌ Reply');
     let deleteButton = makeActionButton('delete ' + (currentUserName == userObj.username ? ' ':' hidden '), 'Delete');
     let editButton = makeActionButton('edit ' + (currentUserName == userObj.username ? ' ': ' hidden '), 'Edit');
     userButtonelem.appendChild(replyButton);
@@ -167,14 +167,17 @@ function makeCommentContent(commentContent = 'lorem lorem') {
 function makeScoreHolder(scoreValue) {
     let divHolder = document.createElement('div');
     divHolder.className = 'scoreHolder';
+    let innerDivHolder = document.createElement('div');
+    innerDivHolder.className = 'innerScoreHolder';
     let spanelem = document.createElement('span');
     spanelem.textContent = scoreValue;
     spanelem.className = 'scoreValue';
     let plusNode = document.createTextNode(' + ');
     let minusNode = document.createTextNode(' - ');
-    divHolder.appendChild(plusNode);
-    divHolder.appendChild(spanelem);
-    divHolder.appendChild(minusNode);
+    innerDivHolder.appendChild(plusNode);
+    innerDivHolder.appendChild(spanelem);
+    innerDivHolder.appendChild(minusNode);
+    divHolder.appendChild(innerDivHolder);
     return divHolder;
 }
 getData();

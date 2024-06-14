@@ -1,6 +1,19 @@
+:root {
+    --moderate-blue : hsl(238, 40%, 52%);
+    --soft-red : hsl(358, 79%, 66%);
+    --light-grayish-blue : hsl(239, 57%, 85%);
+    --pale-red : hsl(357, 100%, 86%);
+    --dark-blue: hsl(212, 24%, 26%);
+    --grayish-blue: hsl(211, 10%, 45%);
+    --light-gray: hsl(223, 19%, 93%);
+    --very-light-gray: hsl(228, 33%, 97%);
+    --white: hsl(0, 0%, 100%);
+}
 body {
     background-color: aliceblue;
     margin: 0px;
+    font-family: Rubik;
+    color: var(--grayish-blue);
 }
 .hidden {
     display: none !important;
@@ -12,8 +25,21 @@ body {
     border-radius: 5px;
 }
 .scoreHolder {
-    padding: 10px;
-    color: darkblue;
+    color: var(--moderate-blue);
+    margin: 10px;
+    /* margin-bottom: 3%; */
+}
+.innerScoreHolder {
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--very-light-gray);
+}
+.scoreValue {
+    padding: 2px 0px;
+    color: var(--moderate-blue);
+    font-weight: bold;
 }
  .contentHolder {
     display: flex;
@@ -22,6 +48,7 @@ body {
  .topContent {
     display: flex;
     justify-content: space-between;
+    padding-top: 10px;
 }
 .topleft {
     display: flex;
@@ -35,7 +62,7 @@ body {
     max-height: 20px;
 }
 .topleft .username {
-    color: black;
+    color: var(--dark-blue);
     font-weight: bold;
     padding-right: 10px;
 }
@@ -49,6 +76,7 @@ body {
 .replyContent {
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 .verticalLine {
     display: flex;
@@ -65,6 +93,20 @@ body {
 .userComment {
     display: flex;
     align-items: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    padding-left: 15px;
+}
+.commentborder {
+    border: 1px solid var(--moderate-blue);
+    border-radius: 5px;
+    padding: 5px;
 }
 .commentTextAreaBox {
     flex: 1;
@@ -72,21 +114,14 @@ body {
     background-color: white;
     min-height: 50px;
     padding: 5px;
+    color: var(--dark-blue);
+    padding-left: 20px;
+    padding-top: 10px;
 }
-.commentborder {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 5px;
-}
-.userAddCommentHolder {
-    margin-left: 20px;
-}
-.update {
-    width: 20%;
-    align-self: end;
-}
+
 .commentContent {
     padding-bottom: 15px;
+    padding-right: 10px;
 }
 
 .modal {
@@ -113,4 +148,70 @@ body {
 }
 .modalText {
     color: gray;
+}
+
+/* css  */
+.actionbutton {
+    color: var(--moderate-blue);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 15px;
+    font-weight: bold;
+    text-align: end;
+}
+.commentandreplyHolder {
+    width: 100%;
+}
+.contentHolder {
+    width: 100%;
+}
+.commentAction .actionbutton {
+    background-color: var(--moderate-blue);
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-self: end;
+    border-radius: 5px;
+}
+
+
+.update {
+    background-color: var(--moderate-blue);
+    /* width: 20%; */
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-self: end;
+    border-radius: 5px;
+}
+.content {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.userComment .profilepicClass {
+    max-height: 30px;
+    max-width: 30px;
+}
+.cancelBtn , .yesDeleteBtn{
+    flex: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    align-self: end;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.cancelBtn {
+    background-color: var(--grayish-blue);
+}
+.yesDeleteBtn {
+    background-color: var(--soft-red);
 }
