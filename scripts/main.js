@@ -148,7 +148,7 @@ function makeTopLeft(userObj, timeposted = '1month ago') {
     let usernameElem = document.createElement('span');
     usernameElem.className = 'username';
     usernameElem.textContent = userObj.username;
-    let timepostedElem = document.createElement('timeposted');
+    let timepostedElem = document.createElement('div');
     timepostedElem.className = 'timeposted';
     timepostedElem.textContent = timeposted;
     divHolder.appendChild(imgelem);
